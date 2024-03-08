@@ -1,0 +1,39 @@
+╔═════════════════════╗
+║IAM Information      ║
+╚═════════════════════╝
+(Roles):
+${join("\n", [
+for key, value in resource_map_iam_role: (
+  join("\n\t", [
+    resource_iam_role[key]
+  ])
+)
+])}
+
+(Policies):
+${join("\n", [
+for key, value in resource_map_iam_policy: (
+  join("\n\t", [
+    resource_iam_policy[key]
+  ])
+)
+])}
+
+(Role Policy Attachments):
+${join("\n", [
+for key, value in resource_map_iam_role_policy_attachment: (
+  join("\n\t", [
+    resource_iam_role_policy_attachment[key]
+  ])
+)
+])}
+
+(Instance_profiles):
+${join("\n", [
+for key, value in resource_map_iam_instance_profile: (
+  join("\n\t", [
+    resource_iam_instance_profile[key]
+  ])
+)
+])}
+

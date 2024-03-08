@@ -1,0 +1,6 @@
+${join("\n", [
+  for key, database in resource_map: (
+    join(";", [key, jsonencode(database)])
+
+  )
+])}

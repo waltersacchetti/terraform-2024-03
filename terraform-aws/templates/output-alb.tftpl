@@ -1,0 +1,14 @@
+╔═══════════════╗
+║ALB Information║
+╚═══════════════╝
+${join("\n", [
+for key, value in resource_map: (
+  join("\n\t", [
+    "(${key})${value.lb_id}",
+    "╠ Lb dns name: ${value.lb_dns_name}",
+    "╠ Lb security group id: ${value.security_group_id != null ? value.security_group_id : "null"}",
+    "╚ Lb zone id: ${value.lb_zone_id}"
+  ])
+)
+])}
+

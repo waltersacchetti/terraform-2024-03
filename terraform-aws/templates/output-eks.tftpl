@@ -1,0 +1,16 @@
+╔═══════════════╗
+║EKS Information║
+╚═══════════════╝
+${join("\n", [
+for eks_key, eks_value in resource_map : (
+  join("\n\t", [
+    "(${eks_key})${eks_value.cluster_name}:",
+    "╠ Cluster version: ${eks_value.cluster_version}",
+    "╠ API server endpoint: ${eks_value.cluster_endpoint}",
+    "╠ Cloudwatch log group: ${eks_value.cloudwatch_log_group_name}",
+    resource_node_group[eks_key],
+    "╚ oidc_provider_arn: ${eks_value.oidc_provider_arn}"
+  ])
+)
+])}
+

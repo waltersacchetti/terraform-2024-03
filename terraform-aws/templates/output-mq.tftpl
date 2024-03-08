@@ -1,0 +1,19 @@
+╔══════════════╗
+║MQ Information║
+╚══════════════╝
+${join("\n", [
+for key, value in resource_map :
+(
+  join("\n\t", [
+    "(${key})${value.broker_name}:",
+    "╠ Console: ${value.instances[0].console_url}",
+    "╠ Endpoints:",
+    "║\t→ ${join("\n\t║\t→ ", value.instances[0].endpoints)}",
+    "╠ Engine: ${value.engine_type}",
+    "╠ Version: ${value.engine_version}",
+    "╠ Username: ${resource_config[key].username}",
+    "╚ Password: ${resource_config[key].password == null || resource_config[key].password == "" ? password[key].result : resource_config[key].password}"
+  ])
+)
+])}
+

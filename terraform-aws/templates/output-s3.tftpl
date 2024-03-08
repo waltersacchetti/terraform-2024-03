@@ -1,0 +1,13 @@
+╔═════════════════════╗
+║S3 Bucket Information║
+╚═════════════════════╝
+${join("\n", [
+for key, value in resource_map : (
+  join("\n\t", [
+    "(${key})${value.s3_bucket_id}",
+    "╠ Bucket URL: ${value.s3_bucket_bucket_domain_name}",
+    "╚ Bucket Region: ${value.s3_bucket_region}"
+  ])
+)
+])}
+

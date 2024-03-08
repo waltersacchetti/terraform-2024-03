@@ -1,0 +1,18 @@
+╔═════════════════════════════╗
+║ElastiCache Redis Information║
+╚═════════════════════════════╝
+${join("\n", [
+for key, value in resource_map:
+(
+  join("\n\t", [
+    "(${key})${value.id}",
+    "╠ Clusters members:",
+    "║\t→ ${join("\n\t║\t→ ", value.member_clusters)}",
+    resource_endpoints[key],
+    "╠ Number replicas per node: ${value.replicas_per_node_group}",
+    "╠ Engine: ${value.engine}",
+    "╚ Version: ${value.engine_version_actual}"
+  ])
+)
+])}
+

@@ -1,0 +1,14 @@
+╔══════════════════════╗
+║Cloudfront Information║
+╚══════════════════════╝
+${join("\n", [
+for key, value in resource_map: (
+  join("\n\t", [
+    "(${key})${value.id}",
+    "╠ Cloudfront domain name: ${value.domain_name}",
+     resource_origin[key],
+     resource_policy[key]
+  ])
+)
+])}
+

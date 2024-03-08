@@ -1,0 +1,26 @@
+client
+dev tun
+proto ${vpn_transport}
+remote ${vpn_server} ${vpn_port}
+remote-random-hostname
+resolv-retry infinite
+nobind
+remote-cert-tls server
+cipher AES-256-GCM
+verb 3
+
+<ca>
+${keystore_cert}
+</ca>
+
+<cert>
+${cert_pem}
+</cert>
+
+<key>
+${cert_key}
+</key>
+
+reneg-sec 0
+
+verify-x509-name ${cert_name} name

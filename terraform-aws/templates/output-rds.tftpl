@@ -1,0 +1,18 @@
+╔═══════════════╗
+║RDS Information║
+╚═══════════════╝
+${join("\n", [
+for key, value in resource_map :
+(
+  join("\n\t", [
+    "(${key})${value.db_instance_identifier}:",
+    "╠ Endpoint: ${value.db_instance_endpoint}",
+    "╠ Port: ${value.db_instance_port}",
+    "╠ Engine: ${value.db_instance_engine}",
+    "╠ Version: ${value.db_instance_engine_version_actual}",
+    "╠ Username: ${value.db_instance_username}",
+    "╚ Password: ${resource_config[key].password == null || resource_config[key].password == "" ? password[key].result : resource_config[key].password}"
+  ])
+)
+])}
+

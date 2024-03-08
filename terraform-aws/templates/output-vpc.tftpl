@@ -1,0 +1,21 @@
+╔═══════════════╗
+║VPC Information║
+╚═══════════════╝
+${join("\n", [
+for vpc_key, vpc_value in resource_map : (
+  join("\n\t", [
+    "(${vpc_key})${vpc_value.name}:",
+    "╠ ID: ${vpc_value.vpc_id}",
+    "╚ Subnets",
+    "  ╠ Database",
+    "  ║\t→ ${join("\n\t  ║\t→ ", try(vpc_value.database_subnets, []))}",
+    "  ╠ Elasticache",
+    "  ║\t→ ${join("\n\t  ║\t→ ", try(vpc_value.elasticache_subnets, []))}",
+    "  ╠ Public",
+    "  ║\t→ ${join("\n\t  ║\t→ ", try(vpc_value.public_subnets, []))}",
+    "  ╚ Private",
+    "  \t→ ${join("\n\t  \t→ ", try(vpc_value.private_subnets, []))}"
+  ])
+)
+])}
+

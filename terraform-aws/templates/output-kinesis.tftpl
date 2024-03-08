@@ -1,0 +1,15 @@
+╔════════════════════════════════╗
+║Kinesis Video Stream Information║
+╚════════════════════════════════╝
+${join("\n", [
+for key, value in resource_map: (
+  join("\n\t", [
+    "(${key})${value.device_name}",
+    "╠ Name: ${value.name}",
+    "╠ Data Retention: ${value.data_retention_in_hours} hour(s)",
+    "╠ Media Type: ${value.media_type}",
+    "╚ Version: ${value.version}"
+  ])
+)
+])}
+

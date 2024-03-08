@@ -1,0 +1,19 @@
+╔═══════════════╗
+║EC2 Information║
+╚═══════════════╝
+${join("\n", [
+for key, value in resource_map: (
+  join("\n\t", [
+    "(${key})${value.id}",
+    "╠ Private IP: ${value.private_ip}",
+    "╠ Private DNS: ${value.private_dns}",
+    "╚ Root EBS:",
+    "  ╠ \t Id:  ${value.root_block_device[0].volume_id}",
+    "  ╠ \t Device name:  ${value.root_block_device[0].device_name}",
+    "  ╠ \t Volume size:  ${value.root_block_device[0].volume_size}",
+    "  ╠ \t Volume type:  ${value.root_block_device[0].volume_type}",
+    "  ╚ \t Encrypted:  ${value.root_block_device[0].encrypted}"
+  ])
+)
+])}
+

@@ -1,0 +1,24 @@
+#!/bin/bash -e
+POSTGRES_CHAIN=${host}
+NEW_USER=${username}
+NEW_PASSWORD=${password}
+GRANT_PRIVILEGES="0"
+
+
+RESULT_DATA=$(psql $POSTGRES_CHAIN -tc "SELECT 1 FROM pg_database WHERE datname='$NEW_USER'")
+if [ "$RESULT_DATA" != "1" ]; then
+    psql $POSTGRES_CHAIN -c "CREATE DATABASE $NEW_USER"
+    GRANT_PRIVILEGES="1"
+fi
+
+RESULT_USER=$(psql $POSTGRES_CHAIN -tc "SELECT 1 FROM pg_user WHERE usename='$NEW_USER'")
+if [ "$RESULT_USER" != "1" ];then
+    psql $POSTGRES_CHAIN -c "CREATE USER $NEW_USER WITH PASSWORD '$NEW_PASSWORD';"
+    GRANT_PRIVILEGES="1"
+fi
+
+if [ $GRANT_PRIVILEGES -eq "1" ]; then
+    psql $POSTGRES_CHAIN -c "GRANT ALL PRIVILEGES ON DATABASE $NEW_USER TO $NEW_USER;"
+fi
+
+exit 0

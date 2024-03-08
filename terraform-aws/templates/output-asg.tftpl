@@ -1,0 +1,17 @@
+╔═════════════════════════════╗
+║Autoscaling Group Information║
+╚═════════════════════════════╝
+${join("\n", [
+for key, value in resource_map: (
+  join("\n\t", [
+    "(${key})${value.autoscaling_group_id}",
+    "╠ Min size: ${value.autoscaling_group_min_size}",
+    "╠ Max size: ${value.autoscaling_group_max_size}",
+    "╠ Desired capacity: ${value.autoscaling_group_desired_capacity}",
+    "╠ Iam role name: ${value.iam_role_name}",
+    "╠ Iam instance profile id: ${value.iam_instance_profile_id}",
+    "╚ Launch template: ${value.launch_template_name}"
+  ])
+)
+])}
+

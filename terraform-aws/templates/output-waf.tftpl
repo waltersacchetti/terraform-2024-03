@@ -1,0 +1,14 @@
+╔═══════════════╗
+║WAF Information║
+╚═══════════════╝
+${join("\n", [
+for key, value in resource_map: (
+  join("\n\t", [
+    "(${key})${value.name}",
+    "╠ WebACL Id: ${value.id}",
+    "╠ WebACL Capacity: ${value.capacity}",
+    "╚ Scope: ${value.scope}"
+  ])
+)
+])}
+
